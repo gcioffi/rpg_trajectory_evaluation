@@ -175,8 +175,9 @@ if __name__ == '__main__':
                              xlabel='x [m]', ylabel='y [m]')
         pu.plot_trajectory_top(ax, plot_traj.p_es_aligned, 'b', 'Estimate')
         pu.plot_trajectory_top(ax, plot_traj.p_gt, 'm', 'Groundtruth')
-        pu.plot_aligned_top(ax, plot_traj.p_es_aligned, plot_traj.p_gt,
-                            plot_traj.align_num_frames)
+        # uncomment this to plot matches (it's ugly :))
+        # pu.plot_aligned_top(ax, plot_traj.p_es_aligned, plot_traj.p_gt,
+        #                     plot_traj.align_num_frames)
         plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
         fig.tight_layout()
         fig.savefig(plot_dir_i+'/trajectory_top' + '_' + plot_traj.align_str +
@@ -260,7 +261,7 @@ if __name__ == '__main__':
         if n_trials > 1:
             suffix = '_mt'
 
-        plot_types = ['rel_trans', 'rel_trans_perc', 'rel_yaw']
+        plot_types = ['rel_trans', 'rel_trans_perc', 'rel_yaw', 'rel_rot', 'rel_rot_deg_per_m']
         rel_errors, distances = mt_error.get_relative_errors_and_distances(
             error_types=plot_types)
 
@@ -297,6 +298,28 @@ if __name__ == '__main__':
                            labels, colors)
         fig.tight_layout()
         fig.savefig(plot_dir_i+'/rel_yaw_error' + suffix + FORMAT,
+                    bbox_inches="tight")
+        plt.close(fig)
+
+        fig = plt.figure(figsize=(6, 2.5))
+        ax = fig.add_subplot(
+            111, xlabel='Distance traveled [m]',
+            ylabel='Rot error [deg]')
+        pu.boxplot_compare(ax, distances, rel_errors['rel_rot'],
+                           labels, colors)
+        fig.tight_layout()
+        fig.savefig(plot_dir_i+'/rel_rot_error' + suffix + FORMAT,
+                    bbox_inches="tight")
+        plt.close(fig)
+
+        fig = plt.figure(figsize=(6, 2.5))
+        ax = fig.add_subplot(
+            111, xlabel='Distance traveled [m]',
+            ylabel='Rot error [deg per m]')
+        pu.boxplot_compare(ax, distances, rel_errors['rel_rot_deg_per_m'],
+                           labels, colors)
+        fig.tight_layout()
+        fig.savefig(plot_dir_i+'/rel_rot_error_deg_per_m' + suffix + FORMAT,
                     bbox_inches="tight")
         plt.close(fig)
 
