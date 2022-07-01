@@ -250,6 +250,13 @@ class Trajectory:
             self.scale, self.rot, self.trans = au.alignTrajectory(
                 self.p_es, self.p_gt, self.q_es, self.q_gt,
                 self.align_type, self.align_num_frames)
+                
+            # Ground frame G, inertial frame I
+            print("scale: %.3f" % self.scale)
+            print("R_groundtruth_trajectory")
+            print(self.rot)
+            print("t_groundtruth_trajectory")
+            print(self.trans)
 
         self.p_es_aligned = np.zeros(np.shape(self.p_es))
         self.q_es_aligned = np.zeros(np.shape(self.q_es))
