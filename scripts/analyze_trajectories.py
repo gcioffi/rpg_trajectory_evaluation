@@ -98,6 +98,10 @@ def plot_odometry_error_per_dataset(dataset_rel_err, dataset_names, algorithm_na
         for v in algorithm_names:
             config_labels.append(plot_settings['algo_labels'][v])
             config_colors.append(plot_settings['algo_colors'][v])
+            
+        # corl
+        config_colors = ['darkorange', 'gold', 'green']
+        # end
 
         fig = plt.figure(figsize=(12, 3))
         ax = fig.add_subplot(

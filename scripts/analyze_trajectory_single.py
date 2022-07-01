@@ -274,6 +274,36 @@ if __name__ == '__main__':
             ylabel='Translation error [m]')
         pu.boxplot_compare(ax, distances, rel_errors['rel_trans'],
                            labels, colors)
+        
+        # corl
+        
+        # dist22 = rel_errors['rel_trans'][0][0]
+        # dist66 = rel_errors['rel_trans'][0][1]
+        # dist44 = rel_errors['rel_trans'][0][2]
+        # dist89 = rel_errors['rel_trans'][0][3]
+        # dist110 = rel_errors['rel_trans'][0][4]
+
+        # np.savetxt('/home/giovanni/Desktop/corl_data_for_plotting/fig4/subfig2/ndio_dist22.txt', dist22, fmt='%.3f')
+        # np.savetxt('/home/giovanni/Desktop/corl_data_for_plotting/fig4/subfig2/ndio_dist44.txt', dist44, fmt='%.3f')
+        # np.savetxt('/home/giovanni/Desktop/corl_data_for_plotting/fig4/subfig2/ndio_dist66.txt', dist66, fmt='%.3f')
+        # np.savetxt('/home/giovanni/Desktop/corl_data_for_plotting/fig4/subfig2/ndio_dist89.txt', dist89, fmt='%.3f')
+        # np.savetxt('/home/giovanni/Desktop/corl_data_for_plotting/fig4/subfig2/ndio_dist110.txt', dist110, fmt='%.3f')
+
+        # dist22 = rel_errors['rel_rot'][0][0]
+        # dist66 = rel_errors['rel_rot'][0][1]
+        # dist44 = rel_errors['rel_rot'][0][2]
+        # dist89 = rel_errors['rel_rot'][0][3]
+        # dist110 = rel_errors['rel_rot'][0][4]
+
+        # np.savetxt('/home/giovanni/Desktop/corl_data_for_plotting/fig4/subfig3/vio_dist22.txt', dist22, fmt='%.3f')
+        # np.savetxt('/home/giovanni/Desktop/corl_data_for_plotting/fig4/subfig3/vio_dist44.txt', dist44, fmt='%.3f')
+        # np.savetxt('/home/giovanni/Desktop/corl_data_for_plotting/fig4/subfig3/vio_dist66.txt', dist66, fmt='%.3f')
+        # np.savetxt('/home/giovanni/Desktop/corl_data_for_plotting/fig4/subfig3/vio_dist89.txt', dist89, fmt='%.3f')
+        # np.savetxt('/home/giovanni/Desktop/corl_data_for_plotting/fig4/subfig3/vio_dist110.txt', dist110, fmt='%.3f')
+
+        # assert False
+        # end
+
         fig.tight_layout()
         fig.savefig(plot_dir_i+'/rel_translation_error' + suffix + FORMAT,
                     bbox_inches="tight")
