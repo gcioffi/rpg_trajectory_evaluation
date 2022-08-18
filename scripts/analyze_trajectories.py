@@ -26,11 +26,14 @@ rc('text', usetex=True)
 
 FORMAT = '.pdf'
 
-def spec(N):                                             
-    t = np.linspace(-510, 510, N)                                              
-    return np.round(np.clip(np.stack([-t, 510-np.abs(t), t], axis=1), 0, 255)).astype("float32")/255
+# def spec(N):
+#     t = np.linspace(-510, 510, N)
+#     return np.round(np.clip(np.stack([-t, 510-np.abs(t), t], axis=1), 0, 255)).astype("float32")/255
+#
+# PALLETE = spec(20)
 
-PALLETE = spec(20)
+PALLETE = ['blue', 'green', 'red', 'cyan', 'black', 'yellow', 'magenta',
+           'lightblue', 'lightgreen', 'lightcoral', 'darkblue', 'darkred', 'darkgreen']
 
 
 def collect_odometry_error_per_dataset(dataset_multierror_list,
@@ -196,6 +199,7 @@ def plot_trajectories(dataset_trajectories_list, dataset_names, algorithm_names,
                              xlabel='x [m]', ylabel='y [m]')
         if dataset_nm in plot_settings['datasets_titles']:
             ax.set_title(plot_settings['datasets_titles'][dataset_nm])
+
         for alg in algorithm_names:
             if plot_traj_per_alg:
                 fig_i = plt.figure(figsize=(6, 5.5))

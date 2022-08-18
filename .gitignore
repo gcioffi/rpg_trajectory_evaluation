@@ -1,0 +1,3 @@
+.idea/
+scripts/*.pyc
+src/rpg_trajectory_evaluation/*.pyc
