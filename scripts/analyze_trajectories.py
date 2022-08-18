@@ -103,7 +103,7 @@ def plot_odometry_error_per_dataset(dataset_rel_err, dataset_names, algorithm_na
             config_colors.append(plot_settings['algo_colors'][v])
             
         # corl
-        config_colors = ['darkorange', 'gold', 'green']
+        # config_colors = ['darkorange', 'gold', 'green']
         # end
 
         fig = plt.figure(figsize=(12, 3))
@@ -111,7 +111,7 @@ def plot_odometry_error_per_dataset(dataset_rel_err, dataset_names, algorithm_na
             121, xlabel='Distance traveled (m)',
             ylabel='Translation error (\%)')
         pu.boxplot_compare(ax, distances, [rel_err['trans_err_perc'][v] for v in algorithm_names],
-                           config_labels, config_colors, legend=False)
+                           config_labels, config_colors, legend=True)
         ax = fig.add_subplot(
             122, xlabel='Distance traveled (m)', ylabel='Rotation error (deg / m)')
         pu.boxplot_compare(ax, distances, [rel_err['rot_deg_per_m'][v] for v in algorithm_names],
