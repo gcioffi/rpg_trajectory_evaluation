@@ -21,8 +21,8 @@ from fn_constants import kNsToEstFnMapping, kNsToMatchFnMapping, kFnExt
 
 init(autoreset=True)
 
-rc('font', **{'family': 'serif', 'serif': ['Cardo']})
-rc('text', usetex=True)
+# rc('font', **{'family': 'serif', 'serif': ['Cardo']})
+# rc('text', usetex=True)
 
 FORMAT = '.pdf'
 
@@ -116,6 +116,13 @@ def plot_odometry_error_per_dataset(dataset_rel_err, dataset_names, algorithm_na
         fig.savefig(output_dir+'/'+dataset_nm +
                     '_trans_rot_error'+FORMAT, bbox_inches="tight", dpi=args.dpi)
         plt.close(fig)
+
+        # RAL submission
+        # save relative error data
+        import pickle
+        with open(os.path.join(output_dir + '/rel_err.pickle'), 'wb') as f:
+                pickle.dump(rel_err, f)
+        # 
 
 
 def collect_rmse_per_dataset(config_multierror_list,
