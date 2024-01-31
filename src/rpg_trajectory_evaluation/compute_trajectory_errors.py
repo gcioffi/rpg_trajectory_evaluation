@@ -3,6 +3,7 @@
 import os
 import numpy as np
 
+import align_utils
 import trajectory_utils as tu
 import transformations as tf
 
@@ -27,10 +28,14 @@ def compute_relative_error(p_es, q_es, p_gt, q_gt, T_cm, dist, max_dist_diff,
     errors = []
     for idx, c in enumerate(comparisons):
         if not c == -1:
+            # Align scale
+            s, _, _ = align_utils.alignTrajectory(
+                p_es[idx:c, :], p_gt[idx:c, :], q_es[idx:c, :], q_gt[idx:c, :], method='sim3')
+            
             T_c1 = tu.get_rigid_body_trafo(q_es[idx, :], p_es[idx, :])
             T_c2 = tu.get_rigid_body_trafo(q_es[c, :], p_es[c, :])
             T_c1_c2 = np.dot(np.linalg.inv(T_c1), T_c2)
-            T_c1_c2[:3, 3] *= scale
+            T_c1_c2[:3, 3] *= s
 
             T_m1 = tu.get_rigid_body_trafo(q_gt[idx, :], p_gt[idx, :])
             T_m2 = tu.get_rigid_body_trafo(q_gt[c, :], p_gt[c, :])

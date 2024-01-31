@@ -24,7 +24,7 @@ FORMAT = '.pdf'
 
 def analyze_multiple_trials(results_dir, est_type, n_trials,
                             recalculate_errors=False,
-                            preset_boxplot_distances=[],
+                            preset_boxplot_distances=[100.0, 200.0, 300.0, 400.0, 500.0, 600.0, 700.0, 800.0],
                             preset_boxplot_percentages=[0.1, 0.2, 0.3, 0.4, 0.5],
                             compute_odometry_error=True):
     traj_list = []
@@ -328,4 +328,53 @@ if __name__ == '__main__':
     import subprocess as s
     s.call(['notify-send', 'rpg_trajectory_evaluation finished',
             'results in: {0}'.format(os.path.abspath(args.result_dir))])
+    
+    # import IPython
+    # IPython.embed()
+
+    # rel_trans_err 100 m = rel_errors['rel_trans'][0][0]
+    # rel_trans_err 200 m = rel_errors['rel_trans'][0][1] 
+    # rel_trans_perc
+
+    # Compute Kitti errors
+    n_dist = len(rel_errors['rel_trans_perc'][0])
+    assert n_dist == 8
+
+    # translation
+    num = 0
+    den = 0
+    for n in range(n_dist):
+        num = num + np.sum(rel_errors['rel_trans_perc'][0][n])
+        den = den + len(rel_errors['rel_trans_perc'][0][n])
+    e_trans = num / den
+
+    # rotation per m
+    num = 0
+    den = 0
+    for n in range(n_dist):
+        num = num + np.sum(rel_errors['rel_rot_deg_per_m'][0][n])
+        den = den + len(rel_errors['rel_rot_deg_per_m'][0][n])
+    e_rot_per_m = num / den
+
+    # rotation per 100 m
+    num = 0
+    den = 0
+    for n in range(n_dist):
+        num = num + np.sum(rel_errors['rel_rot_deg_per_m'][0][n] * 100)
+        den = den + len(rel_errors['rel_rot_deg_per_m'][0][n])
+    e_rot_per_100_m = num / den
+
+    e_arr = np.array([
+        e_trans, e_rot_per_m, e_rot_per_100_m
+    ]).reshape((1,3))
+
+    out_fn = os.path.join(
+        os.path.dirname(os.path.dirname(plot_dir_i)), 'saved_results', 'kitti_errors.txt')
+    header = 'trans_perc rot_per_m rot_per_100_m'
+    np.savetxt(out_fn, e_arr, header=header, fmt='%.3f')
+
+    print("KITTI")
+    print("e_trans [perc]= %.3f" % e_trans)
+    print("e_rot_per_m = %.3f" % e_rot_per_m)
+    print("e_rot_per_100_m = %.3f" % e_rot_per_100_m)
 
