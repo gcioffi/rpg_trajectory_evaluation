@@ -252,7 +252,7 @@ class Trajectory:
                 self.align_type, self.align_num_frames)
                 
             # Ground frame G, inertial frame I
-            print("scale: %.3f" % self.scale)
+            print("scale: %.6f" % self.scale)
             print("R_groundtruth_trajectory")
             print(self.rot)
             print("t_groundtruth_trajectory")
