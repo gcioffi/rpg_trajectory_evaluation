@@ -135,15 +135,16 @@ class MulTrajError(object):
                 np.array(self.success_indices).astype(int), fmt='%i')
 
     def cache_current_error(self):
-        if self.abs_errors:
-            with open(os.path.join(self.cache_results_dir,
-                                   'mt_cached_abs_err_' +
-                                   self.align_str+'.pickle'), 'wb') as f:
-                pickle.dump(self.abs_errors, f)
-        if self.rel_errors:
-            with open(os.path.join(self.cache_results_dir,
-                                   'mt_cached_rel_err.pickle'), 'wb') as f:
-                pickle.dump(self.rel_errors, f)
+        pass
+        # if self.abs_errors:
+        #     with open(os.path.join(self.cache_results_dir,
+        #                            'mt_cached_abs_err_' +
+        #                            self.align_str+'.pickle'), 'wb') as f:
+        #         pickle.dump(self.abs_errors, f)
+        # if self.rel_errors:
+        #     with open(os.path.join(self.cache_results_dir,
+        #                            'mt_cached_rel_err.pickle'), 'wb') as f:
+        #         pickle.dump(self.rel_errors, f)
 
     def get_relative_errors_and_distances(
             self, error_types=['rel_trans', 'rel_trans_perc', 'rel_yaw']):

@@ -2,3 +2,6 @@
 .vscode/
 scripts/*.pyc
 src/rpg_trajectory_evaluation/*.pyc
+scripts/__pycache__/
+src/rpg_trajectory_evaluation/__pycache__/
+
